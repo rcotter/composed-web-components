@@ -3,7 +3,7 @@
   tmpl.innerHTML = `
   <style>
     :host {
-      color: green;
+      color: blue;
     }
     
     .container {
@@ -18,14 +18,14 @@
   </style>
   
   <div class="container">
-    <p>This is a dumb web component from Service 2</p>
+    <p>This is a public, dumb web component from Service 1</p>
     <div class="slot">
         <slot name="child">child slot is unoccupied</slot>
     </div>
   </div>
 `;
   
-  window.customElements.define('dumb-component-2', class extends HTMLElement {
+  window.customElements.define('dumb-component-1', class extends HTMLElement {
     constructor() {
       super();
       

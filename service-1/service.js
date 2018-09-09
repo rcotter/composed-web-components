@@ -1,10 +1,8 @@
-const buildApp = require('../service-base');
+const runApp = require('../service-base');
 
-const app = buildApp({
+const app = runApp({
   port: 3001,
-  staticsPath: './service-1/public'
-});
-
-app.get('/hi', (req, res) => {
-  res.send('app 1');
+  publicStaticsPath: './service-1/public',
+  securedStaticsPath: './service-1/secured',
+  securityToken: 'svc-1'
 });
