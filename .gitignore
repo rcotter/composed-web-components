@@ -1,0 +1,63 @@
+# Environment variables
+.env
+
+# Logs
+logs
+*.log
+*.rdb
+
+# Ignore lock files for npm (use YARN)
+package-lock.json
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# Dependencies
+node_modules
+
+# Precompile
+dist
+
+# seed, etc.
+tmp
+
+# Test Coverage
+coverage
+
+# IDEs
+.idea
+
+
+# Redis Dump
+dump.rdb
+
+# Mac OS
+.DS_Store
+
+# testingfolder
+testingfolder
+
+# Draw spoofing
+lib/jobs/draw/spoofing/spoofedPowerballData.json
+
+# local config file
+config.local.js
+
+# Floobits
+.floo
+.flooignore
+
+# notes you want to keep
+notes
+
+# Unencrypted Configuration Files
+production.js
+staging.js
+
+# Ignore memory swap files
+*.swp
+
+# ESLint Cache
+.eslintcache

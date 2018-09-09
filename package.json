@@ -1,0 +1,24 @@
+{
+  "name": "composed-web-components",
+  "version": "1.0.0",
+  "description": "Compose web components served by microservices with auth on smart components and simple caching breaking",
+  "main": "index.js",
+  "scripts": {
+    "open": "open app/index.html",
+    "start": "node ./service-1/service.js & node ./service-2/service.js",
+    "start:watch": "nodemon -e js,html,lock -x 'yarn start'"
+  },
+  "keywords": [
+    "web",
+    "components"
+  ],
+  "author": "Rick Cotter",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4",
+    "open": "^0.0.5"
+  }
+}

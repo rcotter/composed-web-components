@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="http://localhost:3001/web-components/dumb-component-1.js"></script>
+  <script src="http://localhost:3002/web-components/dumb-component-2.js"></script>
+</head>
+<body>
+
+<h1>Composed Web Components From Microservices</h1>
+
+<div>
+  <dumb-component-1>Dumb Component 1 Placeholder</dumb-component-1>
+</div>
+<div>
+  <dumb-component-2>
+    Dumb Component 2 Placeholder
+    
+    <dumb-component-1 slot="child">
+      <dumb-component-2 slot="child"></dumb-component-2>
+    </dumb-component-1>
+  </dumb-component-2>
+</div>
+</body>
+</html>
