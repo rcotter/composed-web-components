@@ -1,6 +1,12 @@
 const express = require('express');
 const app = express();
 
+function enableCorsMiddleware(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+}
+
 function securityTokenMiddleware(securityToken) {
   return function verifyReqSecurityToken(req, res, next) {
     if (securityToken === req.query.token) return next();
@@ -18,20 +24,19 @@ function errorMiddleware(err, req, res, next) {
 
 function buildApp(
   {
-    port,
     publicStaticsPath,
     securedStaticsPath,
     securityToken
   } = {}
 ) {
   
+  app.use(enableCorsMiddleware);
+  
   app.use(express.static(publicStaticsPath));
   
-  app.use(securityTokenMiddleware(securityToken), express.static(securedStaticsPath));
+  app.use('/secured', securityTokenMiddleware(securityToken), express.static(securedStaticsPath));
   
   app.use(errorMiddleware);
-  
-  app.listen(port, () => console.log(`Microservice listening on port ${port}`));
   
   return app
 }

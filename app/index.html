@@ -2,28 +2,41 @@
 <html>
 <head>
   <script src="http://localhost:3001/dumb-component-1.js"></script>
-  <script src="http://localhost:3001/smart-component-1.js?token=svc-1"></script>
+  <script src="http://localhost:3001/secured/smart-component-1.js?token=svc-1"></script>
   <script src="http://localhost:3002/dumb-component-2.js"></script>
-  <script src="http://localhost:3002/smart-component-2.js?token=svc-2"></script>
+  <script src="http://localhost:3002/secured/smart-component-2.js?token=svc-2"></script>
 </head>
 <body>
 
 <h1>Composed Web Components From Microservices</h1>
 
-<smart-component-1>Smart Component 1 Placeholder</smart-component-1>
-<smart-component-2>Smart Component 2 Placeholder</smart-component-2>
-
-<div>
-  <dumb-component-1>Dumb Component 1 Placeholder</dumb-component-1>
-</div>
-<div>
-  <dumb-component-2>
-    Dumb Component 2 Placeholder
+<dumb-component-1 slot="child">
+  Dumb Component 1 Placeholder
+  
+  <smart-component-1 slot="child">
+    Smart Component 1 Placeholder
     
-    <dumb-component-1 slot="child">
-      <dumb-component-2 slot="child"></dumb-component-2>
-    </dumb-component-1>
-  </dumb-component-2>
-</div>
+    <smart-component-2 slot="child">
+      Smart Component 2 Placeholder
+  
+      <dumb-component-1 slot="child">
+        Dumb Component 1 Placeholder
+  
+        <dumb-component-2 slot="child">
+          Dumb Component 2 Placeholder
+          
+          <dumb-component-2 slot="child">
+            Dumb Component 2 Placeholder
+  
+            <smart-component-1 slot="child">
+              Smart Component 1 Placeholder
+            </smart-component-1>
+          </dumb-component-2>
+        </dumb-component-2>
+      </dumb-component-1>
+    </smart-component-2>
+  </smart-component-1>
+</dumb-component-1>
+
 </body>
 </html>
