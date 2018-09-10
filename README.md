@@ -13,3 +13,10 @@ Smart components contain sensitive logic and so are served from secured routes.
 ## Playing
 ### Unauthenticate a smart component
 Open the shell app and edit the token of a smart component to see what happens when web component cannot be retrieved.
+
+
+## TODO
+* POC cache busting.
+* HTTP/2?
+* Passing attributes
+* skatejs?
