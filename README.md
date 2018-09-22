@@ -16,7 +16,6 @@ Open the shell app and edit the token of a smart component to see what happens w
 
 
 ## TODO
-* POC cache busting.
+* POC cache busting
 * HTTP/2?
 * Passing attributes
-* skatejs?
