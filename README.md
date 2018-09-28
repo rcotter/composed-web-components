@@ -16,6 +16,8 @@ Open the shell app and edit the token of a smart component to see what happens w
 
 
 ## TODO
+* Import lit-html directly in components as per https://jakearchibald.com/2017/es-modules-in-browsers/
+* Minimal state updates. Could just be a plain JSON. Or Redux. On the update() handler.
 * POC cache busting
 * HTTP/2?
 * Passing attributes

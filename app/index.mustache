@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script src="http://localhost:3001/dumb-component-1.js"></script>
-  <script src="http://localhost:3001/secured/smart-component-1.js?token=svc-1"></script>
-  <script src="http://localhost:3002/dumb-component-2.js"></script>
-  <script src="http://localhost:3002/secured/smart-component-2.js?token=svc-2"></script>
 </head>
 <body>
 
 <h1>Composed Web Components From Microservices</h1>
+
+<i-am-lit-component-1 my-mood="sad">I Am Lit Placeholder</i-am-lit-component-1>
 
 <dumb-component-1 slot="child">
   Dumb Component 1 Placeholder
@@ -38,5 +36,11 @@
   </smart-component-1>
 </dumb-component-1>
 
+<script src="http://localhost:3001/dumb-component-1.js"></script>
+<script src="http://localhost:3001/i-am-lit-component-1.js" type="module" ></script>
+<script src="http://localhost:3001/secured/smart-component-1.js?token=svc-1"></script>
+
+<script src="http://localhost:3002/dumb-component-2.js"></script>
+<script src="http://localhost:3002/secured/smart-component-2.js?token=svc-2"></script>
 </body>
 </html>
