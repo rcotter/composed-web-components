@@ -6,7 +6,7 @@
   "scripts": {
     "open": "open http://localhost:3000",
     "start": "node ./service-1/service.js & node ./service-2/service.js & node ./app/app.js",
-    "start:watch": "nodemon -e js,html,lock -x 'yarn start'"
+    "start:watch": "nodemon -e js,html,mustache,lock -x 'yarn start'"
   },
   "keywords": [
     "web",
