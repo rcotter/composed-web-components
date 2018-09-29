@@ -9,10 +9,10 @@ const MOOD_SAD = 'sad';
 const MOOD_MEH = 'meh';
 
 const mapMoodToSettings = {
-  'uncertain': {color: 'black', weight: 'normal', style: 'normal'},
+  'uncertain': { color: 'black', weight: 'normal', style: 'normal' },
   'happy': { mood: MOOD_HAPPY, color: 'red', weight: 'normal', style: 'italic' },
-  'sad' : {color: 'blue', weight: 'bold', style: 'normal'},
-  'meh': {color: 'green', weight: 'normal', style: 'normal'}
+  'sad': { color: 'blue', weight: 'bold', style: 'normal' },
+  'meh': { color: 'green', weight: 'normal', style: 'normal' }
 };
 
 class MoodLitHtmlComponentSvc1 extends LitElement {
@@ -63,20 +63,19 @@ class MoodLitHtmlComponentSvc1 extends LitElement {
       </style>
       
       <div class="container">
-        <p>
-        This is a <a href="https://polymer.github.io/lit-html" target="_blank">lit-html</a>
-        templated native web component (lighter & faster than VDOM).
-        </p>
+        <h2>Pick your mood</h2>
         
         <p>
-        Open your DOM inspector and select a mood. Alternatively, directly edit the 'my-mood' attribute in
-        the DOM and watch the mood selector stay synced. <br />
-        Try 'happy', 'sad', 'meh', 'uncertain', or some garbage input.
+        This is a super
+        <a href="https://medium.com/@lucamezzalira/a-night-experimenting-with-lit-html-585a8c69892a" target="_blank">performant</a>
+        native web component using
+        <a href="https://polymer.github.io/lit-html/" target="_blank">lit-html</a>
+        templating. No framework. No build tool chain whatsoever.
         </p>
         
         <p class="mood">I am ${this.mood}</p>
         
-        <label for="mood-select">Pick a new mood. Your reality is a choice.</label>
+        <label for="mood-select">Your reality is a choice.</label>
         <select
           id="mood-select"
           @change="${e => this.mood = e.target.options[e.target.selectedIndex].value}"
@@ -86,6 +85,19 @@ class MoodLitHtmlComponentSvc1 extends LitElement {
           <option value="sad" ?selected="${this.mood === MOOD_SAD}">SAD</option>
           <option value="meh" ?selected="${this.mood == MOOD_MEH}">MEH</option>
         </select>
+        
+        <p>
+        Open your DOM inspector, expand this component, and watch updates as you select a mood.
+        Alternatively, directly edit the 'my-mood' attribute
+        and notice that the mood selector stays synced. <br />
+        Try 'happy', 'sad', 'meh', 'uncertain', or some garbage input.
+        </p>
+        
+        <p>
+        <small>
+          Although lit-html comes from the <a href="https://www.polymer-project.org/" target="_blank">Polymer</a> team this is not a Polymer generated component.</small>
+        </small>
+        <p>
       </div>
     `;
   }
