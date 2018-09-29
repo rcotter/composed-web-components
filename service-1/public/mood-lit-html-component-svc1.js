@@ -78,12 +78,12 @@ class MoodLitHtmlComponentSvc1 extends LitElement {
         <label for="mood-select">Your reality is a choice.</label>
         <select
           id="mood-select"
-          @change="${e => this.mood = e.target.options[e.target.selectedIndex].value}"
+          @change=${e => this.mood = e.target.options[e.target.selectedIndex].value}
         >
-          <option value="none" ?selected="${this.mood === MOOD_UNCERTAIN}" style="display:none;" disabled>Pick One</option>
-          <option value="happy" ?selected="${this.mood === MOOD_HAPPY}">HAPPY</option>
-          <option value="sad" ?selected="${this.mood === MOOD_SAD}">SAD</option>
-          <option value="meh" ?selected="${this.mood == MOOD_MEH}">MEH</option>
+          <option value="none" ?selected=${this.mood === MOOD_UNCERTAIN} style="display:none;" disabled>Pick One</option>
+          <option value="happy" ?selected=${this.mood === MOOD_HAPPY}>HAPPY</option>
+          <option value="sad" ?selected=${this.mood === MOOD_SAD}>SAD</option>
+          <option value="meh" ?selected=${this.mood == MOOD_MEH}>MEH</option>
         </select>
         
         <p>
