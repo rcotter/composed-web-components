@@ -7,23 +7,12 @@ const MOOD_HAPPY = 'happy';
 const MOOD_SAD = 'sad';
 const MOOD_MEH = 'meh';
 
-const moodSettingsDefaults = {
-  color: 'black', weight: 'normal', style: 'normal'
+const mapMoodToSettings = {
+  'uncertain': {color: 'black', weight: 'normal', style: 'normal'},
+  'happy': { mood: MOOD_HAPPY, color: 'red', weight: 'normal', style: 'italic' },
+  'sad' : {color: 'blue', weight: 'bold', style: 'normal'},
+  'meh': {color: 'green', weight: 'normal', style: 'normal'}
 };
-
-const mapMoodToSettings = [
-  { mood: MOOD_UNCERTAIN },
-  { mood: MOOD_HAPPY, color: 'red', style: 'italic' },
-  { mood: MOOD_SAD, color: 'blue', weight: 'bold' },
-  { mood: MOOD_MEH, color: 'green' }
-]
-  .reduce((lookup, settings) => {
-      lookup[settings.mood] = Object.assign({}, moodSettingsDefaults, settings);
-      return lookup
-    },
-    {}
-  );
-
 
 class MoodLitHtmlComponentSvc1 extends LitElement {
   constructor() {
