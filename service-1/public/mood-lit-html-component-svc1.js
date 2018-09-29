@@ -7,7 +7,8 @@ const MOOD_UNCERTAIN = 'uncertain';
 const MOOD_HAPPY = 'happy';
 const MOOD_SAD = 'sad';
 const MOOD_MEH = 'meh';
-const MOODS_REGEX = new RegExp(/^`uncertain|happy|sad|meh`$/)
+const MOODS = [MOOD_UNCERTAIN, MOOD_HAPPY, MOOD_SAD, MOOD_MEH];
+const MOODS_REGEX = new RegExp(/^`uncertain|happy|sad|meh`$/);
 
 class MoodLitHtmlComponentSvc1 extends LitElement {
   constructor() {
@@ -73,17 +74,24 @@ class MoodLitHtmlComponentSvc1 extends LitElement {
         templating. No framework. No build tool chain whatsoever.
         </p>
         
-        <p class=${this.mood}>I am ${this.mood}</p>
+        <p class=${this.mood}>
+          <!-- Slick little bit of straight up JS -->
+          ${ this.mood === MOOD_UNCERTAIN ? html`I haven't picked my mood yet` : html`I am ${this.mood}` }
+        </p>
         
         <label for="mood-select">Your reality is a choice.</label>
         <select
           id="mood-select"
           @change=${e => this.mood = e.target.options[e.target.selectedIndex].value}
         >
-          <option value="none" ?selected=${this.mood === MOOD_UNCERTAIN} style="display:none;" disabled>Pick One</option>
-          <option value="happy" ?selected=${this.mood === MOOD_HAPPY}>HAPPY</option>
-          <option value="sad" ?selected=${this.mood === MOOD_SAD}>SAD</option>
-          <option value="meh" ?selected=${this.mood == MOOD_MEH}>MEH</option>
+        
+          <!-- Slightly contrived excuse to use JS to construct nested template pieces. However, watch it re-render just as efficiently on mood selection. -->
+          
+          ${
+            MOODS.map(mood => {
+              return html`<option value=${mood} ?selected=${this.mood === mood}>${mood.toUpperCase()}</option>`;
+            })
+          }
         </select>
         
         <p>
