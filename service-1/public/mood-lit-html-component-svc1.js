@@ -1,4 +1,5 @@
 // Web component using LitElement (lit-html templating)
+// See https://github.com/Polymer/lit-element
 
 import { html, LitElement } from 'https://unpkg.com/@polymer/lit-element@0.6.1/lit-element.js?module';
 
