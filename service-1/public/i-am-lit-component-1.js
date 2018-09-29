@@ -1,68 +1,58 @@
+// Web component using LitElement (lit-html templating)
+
 import { html, LitElement } from 'https://unpkg.com/@polymer/lit-element@0.6.1/lit-element.js?module';
 
+const MOOD_UNCERTAIN = 'uncertain';
+const MOOD_HAPPY = 'happy';
+const MOOD_SAD = 'sad';
+const MOOD_MEH = 'meh';
 
-class IAmLitComponent1 extends LitElement {
+const moodSettingsDefaults = {
+  color: 'black', weight: 'normal', style: 'normal'
+};
+
+const mapMoodToSettings = [
+  { mood: MOOD_UNCERTAIN },
+  { mood: MOOD_HAPPY, color: 'red', style: 'italic' },
+  { mood: MOOD_SAD, color: 'blue', weight: 'bold' },
+  { mood: MOOD_MEH, color: 'green' }
+]
+  .reduce((lookup, settings) => {
+      lookup[settings.mood] = Object.assign({}, moodSettingsDefaults, settings);
+      return lookup
+    },
+    {}
+  );
+
+
+class MoodLitHtmlComponentSvc1 extends LitElement {
   constructor() {
     super();
     
-    // this.mood = 'happy';
+    this.mood = MOOD_UNCERTAIN;
   }
-  
-  // TODO let them initialize/select via attribute
-  // TODO replace dumb-component-1 with this one
   
   static get properties() {
     return {
       mood: {
         type: {
           fromAttribute: val => {
-            console.log(val);
-            return val;
+            if (mapMoodToSettings[val]) return val;
+            return MOOD_UNCERTAIN;
           }
         },
         attribute: 'my-mood',
-        reflect: false
+        reflect: true
       }
     };
   }
   
-  moodSelectedHandler(option) {
-    // alert('moodSelectedHandler');
-    console.log(`${option.text} selected. Was ${this.mood}`);
-    
-    this.mood = option.text;
-    
-    const values = option.value.split(':');
-    this.moodColor = values[0];
-    this.moodWeight = values[1];
-    this.moodStyle = values[2];
-  }
-  
-  get isNone() {
-    console.log(`isNone: ${this.mood}`);
-    return !this.mood;
-  }
-  
-  get isHappy() {
-    // alert('isHappy')
-    console.log(`isHappy: ${this.mood}`);
-    return this.mood === 'happy';
-  }
-  
-  get isSad() {
-    // alert('isSad')
-    console.log(`isSad: ${this.mood}`);
-    return this.mood === 'sad';
-  }
-  
-  get isMeh() {
-    // alert('isMeh')
-    console.log(`isMeh: ${this.mood}`);
-    return this.mood === 'meh';
+  syncSettingsToMood() {
+    this.moodSettings = mapMoodToSettings[this.mood];
   }
   
   render() {
-    console.log(`render: ${this.mood}`);
+    this.syncSettingsToMood();
     
     return html`
       <style>
@@ -76,30 +66,39 @@ class IAmLitComponent1 extends LitElement {
         }
         
         .mood {
-          color: ${this.moodColor};
-          font-weight: ${this.moodWeight};
-          font-style: ${this.moodStyle};
+          color: ${this.moodSettings.color};
+          font-weight: ${this.moodSettings.weight};
+          font-style: ${this.moodSettings.style};
         }
       </style>
       
       <div class="container">
-        <p>This is a lit-html templated component (lighter & faster than VDOM)</p>
+        <p>
+        This is a <a href="https://polymer.github.io/lit-html" target="_blank">lit-html</a>
+        templated native web component (lighter & faster than VDOM).
+        </p>
+        
+        <p>
+        Open your DOM inspector and select a mood. Alternatively, directly edit the 'my-mood' attribute in
+        the DOM and watch the mood selector stay synced. <br />
+        Try 'happy', 'sad', 'meh', 'uncertain', or some garbage input.
+        </p>
         
         <p class="mood">I am ${this.mood}</p>
         
-        <label for="mood-select">Select your new mood</label>
+        <label for="mood-select">Pick a new mood. Your reality is a choice.</label>
         <select
           id="mood-select"
-          @change="${e => this.moodSelectedHandler(e.target.options[e.target.selectedIndex])}"
+          @change="${e => this.mood = e.target.options[e.target.selectedIndex].value}"
         >
-          <option value="none" ?selected="${this.isNone}" disabled style="display:none;"></option>
-          <option value="red:normal:italic" ?selected="${this.isHappy}">happy</option>
-          <option value="blue:bold:normal" ?selected="${this.isSad}">sad</option>
-          <option value="green:normal:normal" ?selected="${this.isMeh}">meh</option>
+          <option value="none" ?selected="${this.mood === MOOD_UNCERTAIN}" style="display:none;" disabled>Pick One</option>
+          <option value="happy" ?selected="${this.mood === MOOD_HAPPY}">HAPPY</option>
+          <option value="sad" ?selected="${this.mood === MOOD_SAD}">SAD</option>
+          <option value="meh" ?selected="${this.mood == MOOD_MEH}">MEH</option>
         </select>
       </div>
     `;
   }
 }
 
-window.customElements.define('i-am-lit-component-1', IAmLitComponent1);
+window.customElements.define('mood-lit-html-component-svc1', MoodLitHtmlComponentSvc1);
