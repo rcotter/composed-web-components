@@ -7,13 +7,7 @@ const MOOD_UNCERTAIN = 'uncertain';
 const MOOD_HAPPY = 'happy';
 const MOOD_SAD = 'sad';
 const MOOD_MEH = 'meh';
-
-const mapMoodToSettings = {
-  'uncertain': { color: 'black', weight: 'normal', style: 'normal' },
-  'happy': { mood: MOOD_HAPPY, color: 'red', weight: 'normal', style: 'italic' },
-  'sad': { color: 'blue', weight: 'bold', style: 'normal' },
-  'meh': { color: 'green', weight: 'normal', style: 'normal' }
-};
+const MOODS_REGEX = new RegExp(/^`uncertain|happy|sad|meh`$/)
 
 class MoodLitHtmlComponentSvc1 extends LitElement {
   constructor() {
@@ -27,7 +21,7 @@ class MoodLitHtmlComponentSvc1 extends LitElement {
       mood: {
         type: {
           fromAttribute: val => {
-            if (mapMoodToSettings[val]) return val;
+            if ((val || '').match(MOODS_REGEX)) return val;
             return MOOD_UNCERTAIN;
           }
         },
@@ -37,13 +31,7 @@ class MoodLitHtmlComponentSvc1 extends LitElement {
     };
   }
   
-  syncSettingsToMood() {
-    this.moodSettings = mapMoodToSettings[this.mood];
-  }
-  
   render() {
-    this.syncSettingsToMood();
-    
     return html`
       <style>
         :host {
@@ -55,10 +43,22 @@ class MoodLitHtmlComponentSvc1 extends LitElement {
           padding: 10px;
         }
         
-        .mood {
-          color: ${this.moodSettings.color};
-          font-weight: ${this.moodSettings.weight};
-          font-style: ${this.moodSettings.style};
+        .uncertain {
+          color: black;
+        }
+        
+        .happy {
+          color: red;
+          font-style: italic;
+        }
+        
+        .sad {
+          color: blue;
+          font-weight: bold;
+        }
+        
+        .meh {
+          color: green;
         }
       </style>
       
@@ -73,7 +73,7 @@ class MoodLitHtmlComponentSvc1 extends LitElement {
         templating. No framework. No build tool chain whatsoever.
         </p>
         
-        <p class="mood">I am ${this.mood}</p>
+        <p class=${this.mood}>I am ${this.mood}</p>
         
         <label for="mood-select">Your reality is a choice.</label>
         <select
