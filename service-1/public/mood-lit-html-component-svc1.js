@@ -32,6 +32,19 @@ class MoodLitHtmlComponentSvc1 extends LitElement {
     };
   }
   
+  setMood(mood) {
+    this.mood = mood;
+  
+    this.dispatchEvent(new CustomEvent(
+      'onMoodChanged',
+      {
+        detail: {mood},
+        bubbles: true,
+        composed: true // Leaves Shadow DOM
+      }
+    ));
+  }
+  
   render() {
     return html`
       <style>
@@ -82,7 +95,7 @@ class MoodLitHtmlComponentSvc1 extends LitElement {
         <label for="mood-select">Your reality is a choice.</label>
         <select
           id="mood-select"
-          @change=${e => this.mood = e.target.options[e.target.selectedIndex].value}
+          @change=${e => this.setMood(e.target.options[e.target.selectedIndex].value)}
         >
         
           <!-- Slightly contrived excuse to use JS to construct nested template pieces. However, watch it re-render just as efficiently on mood selection. -->

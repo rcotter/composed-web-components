@@ -42,5 +42,10 @@
 
 <script src="http://localhost:3002/dumb-component-2.js"></script>
 <script src="http://localhost:3002/secured/smart-component-2.js?token=svc-2"></script>
+<script>
+  this.addEventListener('onMoodChanged', function (e) {
+    console.log(`Parent detected mood as ${e.detail.mood}`);
+  });
+</script>
 </body>
 </html>
