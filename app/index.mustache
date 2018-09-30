@@ -6,6 +6,19 @@
 
 <h1>Composed Web Components From Microservices</h1>
 
+<list-max-slotted-items visible-count="5">
+  <div>1st</div>
+  <div>2nd</div>
+  <div>3rd</div>
+  <div>4th</div>
+  <div>5th</div>
+  <div>6th</div>
+  <div>7th</div>
+  <div>8th</div>
+  <div>9th</div>
+  <div>10th</div>
+</list-max-slotted-items>
+
 <mood-lit-html-component-svc1 my-mood="sad">Mood Lit Html Placeholder</mood-lit-html-component-svc1>
 
 <dumb-component-1 slot="child">
@@ -41,6 +54,7 @@
 <script src="http://localhost:3001/secured/smart-component-1.js?token=svc-1"></script>
 
 <script src="http://localhost:3002/dumb-component-2.js"></script>
+<script src="http://localhost:3002/list-max-slotted-items.js" type="module" ></script>
 <script src="http://localhost:3002/secured/smart-component-2.js?token=svc-2"></script>
 <script>
   this.addEventListener('onMoodChanged', function (e) {
